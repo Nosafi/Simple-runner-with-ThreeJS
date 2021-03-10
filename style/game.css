@@ -9,3 +9,11 @@
 body {
   overflow: hidden;
 }
+
+.score_Tablo {
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  position: absolute;
+}
