@@ -10,8 +10,11 @@ game.onClick("keydown", (keys) => {
   //Camera controls
   if (keys.ArrowRight) game.moveCameraRight();
   if (keys.ArrowLeft) game.moveCameraLeft();
+  if (keys.ArrowUp) game.moveCameraUp();
+  if (keys.ArrowDown) game.moveCameraDown();
   if (keys.KeyR) game.moveCameraReset();
 });
+
 game.onClick("keypress", (keys) => {
   if (keys.Space) game.moveHeroShoot();
 });

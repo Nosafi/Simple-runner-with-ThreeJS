@@ -42,16 +42,19 @@ const game = new (function () {
   };
 
   this.moveCameraRight = () => {
-    camera.rotation.y += 0.1;
-    camera.position.x += 0.3;
+    scene.rotation.y += 0.01;
   };
   this.moveCameraLeft = () => {
-    camera.rotation.y += -0.1;
-    camera.position.x += -0.3;
+    scene.rotation.y += -0.01;
+  };
+  this.moveCameraUp = () => {
+    scene.rotation.x += -0.01;
+  };
+  this.moveCameraDown = () => {
+    scene.rotation.x += 0.01;
   };
   this.moveCameraReset = () => {
-    camera.position.set(0, 0, 15);
-    camera.rotation.set(0, 0, 0);
+    scene.rotation.set(0.3, 0, 0);
   };
 
   const enemyGenerate = () => {
@@ -79,6 +82,7 @@ const game = new (function () {
     if (score > 0 && score % 10 == 0) {
       level--;
       score++;
+      frame_enemy_cd = 0;
     }
 
     if (frame_enemy_cd == 10 * level) {
@@ -108,6 +112,7 @@ const game = new (function () {
             );
             if (distance_from_enemy < 0.5) {
               score++;
+
               scene.remove(enemy_item);
               dynamicElements.splice(dynamicElements.indexOf(item), 1);
             }
@@ -140,7 +145,6 @@ const game = new (function () {
       1000
     );
     camera.position.z = 15;
-    scene.rotation.y = -0.25;
     scene.rotation.x = 0.3;
 
     window.addEventListener("keydown", (e) => {
@@ -169,25 +173,6 @@ const game = new (function () {
     directionalLight.position.set(0, 1, 0);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
-    const light = new THREE.PointLight(0xc4c4c4, 10);
-    light.position.set(0, 300, 500);
-    scene.add(light);
-    const light2 = new THREE.PointLight(0xc4c4c4, 10);
-    light2.position.set(500, 100, 0);
-    scene.add(light2);
-    const light3 = new THREE.PointLight(0xc4c4c4, 10);
-    light3.position.set(0, 100, -500);
-    scene.add(light3);
-    const light4 = new THREE.PointLight(0xc4c4c4, 10);
-    light4.position.set(-500, 300, 500);
-    scene.add(light4);
-
-    // const road_geometry = new THREE.BoxGeometry(6, 1, 30);
-    // const road_material = new THREE.MeshBasicMaterial({
-    //   color: "#007100",
-    // });
-    // road = new THREE.Mesh(road_geometry, road_material);
-    // scene.add(road);
 
     let loader = new THREE.GLTFLoader();
     loader.load("models/hero/scene.gltf", function (gltf) {
